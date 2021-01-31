@@ -6,7 +6,6 @@ const morgan = require('morgan')
 const uuid = require('node-uuid')
 const path = require('path')
 
-
 console.log = function(id, d) { //
     const msg = (id? id : '-') + ' '+ new Date() + ' ' + util.format(d) + '\n';
     log_file.write(msg);
