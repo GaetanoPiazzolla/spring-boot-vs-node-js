@@ -40,32 +40,26 @@ const login = (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
 
-    if (username && password) {
-        if (username === usernameconfig && password === passwordconfig) {
-            let token = jwt.sign({username: username},
-                jwtSecret,
-                {
-                    expiresIn: '30m'
-                }
-            );
-            // return the JWT token for the future API calls
-            res.json({
-                success: true,
-                message: 'Authentication successful!',
-                token: token
-            });
-        } else {
-            res.send(403).json({
-                success: false,
-                message: 'Incorrect username or password'
-            });
-        }
+    if (username === usernameconfig && password === passwordconfig) {
+        let token = jwt.sign({username: username},
+            jwtSecret,
+            {
+                expiresIn: '30m'
+            }
+        );
+        // return the JWT token for the future API calls
+        res.json({
+            success: true,
+            message: 'Authentication successful!',
+            token: token
+        });
     } else {
-        res.send(400).json({
+        res.send(403).json({
             success: false,
-            message: 'Authentication failed! Please check the request'
+            message: 'Incorrect username or password'
         });
     }
+
 };
 
 module.exports = {

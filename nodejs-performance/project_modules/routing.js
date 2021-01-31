@@ -10,7 +10,10 @@ const configure = (app) => {
         response.json({ info: 'Node.js, Express, and Postgres API' })
     })
 
-    app.post('/login', jwt.login);
+    app.post('/login',
+        body('username').isLength({min: 1}),
+        body('password').isLength({min: 1}),
+        jwt.login);
 
     app.get('/books', jwt.checkToken, db.getBooks)
 
