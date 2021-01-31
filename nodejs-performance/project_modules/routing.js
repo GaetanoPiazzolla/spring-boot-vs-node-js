@@ -1,8 +1,7 @@
 const db = require('./db')
 const { body, validationResult } = require('express-validator');
-const fs = require('fs')
-const encrypt = require('./encrypt')
 const jwt = require('./jwt');
+const cpuIntensive = require('./cpuIntensive')
 
 const configure = (app) => {
 
@@ -13,7 +12,14 @@ const configure = (app) => {
     app.post('/login',
         body('username').isLength({min: 1}),
         body('password').isLength({min: 1}),
-        jwt.login);
+
+        (req,res) => {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(400).json({ errors: errors.array() });
+            }
+            jwt.login(req,res)
+        });
 
     app.get('/books', jwt.checkToken, db.getBooks)
 
@@ -33,22 +39,20 @@ const configure = (app) => {
                 return res.status(400).json({ errors: errors.array() });
             }
             db.createBook(req,res)
+            console.log(req.id,'outside create book')
 
         }))
 
-    app.get('/encrypt',jwt.checkToken,  (req,res) =>{
+    app.get('/cpu-intensive/encrypt',jwt.checkToken,  (req,res) =>{
+        cpuIntensive.encryption().then( () => {
+            res.json({encrypted: true})
+        })
+    })
 
-        let readStream = fs.createReadStream('./resources/nodejs-spring-logo.png', 'utf8');
-        let data;
-        readStream.on('data', function(chunk) {
-            data += chunk;
-        }).on('end', function() {
-            for(let i=0;i<100;i++){
-                encrypt.encrypt(data)
-            }
-            res.json({ encrypt: true })
-        });
-
+    app.get('/cpu-intensive/fibonacci/:num',jwt.checkToken, (req,res) => {
+        cpuIntensive.fibonacci(req.params.num).then( (n) => {
+            res.json({num: n})
+        })
     })
 
 }

@@ -62,3 +62,5 @@ out/
 .vscode/
 
 **/node_modules/
+
+*~lock.**

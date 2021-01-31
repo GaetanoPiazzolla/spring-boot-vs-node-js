@@ -36,7 +36,7 @@ const getBookByISBN = (request, response) => {
 }
 
 const createBook = (request, response) => {
-    console.log(request.id, 'createBook called')
+    console.log(request.id, 'before createbook')
 
     const { title, author, isbn, year } = request.body
 
@@ -46,7 +46,8 @@ const createBook = (request, response) => {
             console.log('error')
             response.status(500).json(error)
         }else{
-            response.status(201).send(`Book added with ID: ${results.insertId}`)
+            console.log(request.id,`Book added`)
+            response.status(201).send(`Book added`)
         }
     })
 

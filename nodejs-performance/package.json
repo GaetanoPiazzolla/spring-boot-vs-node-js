@@ -12,8 +12,8 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
     "express-validator": "^6.9.2",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "node-uuid": "^1.4.8",
     "pg": "^8.5.1",
