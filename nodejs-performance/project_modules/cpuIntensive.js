@@ -1,5 +1,11 @@
-const fs = require('fs')
-const encrypt = require('./encrypt')
+
+function fiboLog(n) {
+    console.log("num:",2)
+    if (n < 2)
+        return 1;
+    else
+        return fiboLog(n - 2) + fiboLog(n - 1);
+}
 
 function fibo(n) {
     if (n < 2)
@@ -14,23 +20,12 @@ const fibonacci = (num) => {
     })
 }
 
-const encryption = () => {
-
+const fibonacciLog = (num) => {
     return new Promise((resolve,reject) => {
-        let readStream = fs.createReadStream('./resources/nodejs-spring-logo.png', 'utf8');
-        let data;
-        readStream.on('data', function(chunk) {
-            data += chunk;
-        }).on('end', function() {
-            for(let i=0;i<100;i++){
-                encrypt.encrypt(data)
-            }
-            resolve()
-        })
+        resolve(fiboLog(num))
     })
-
 }
 
 module.exports ={
-    fibonacci, encryption
+    fibonacci, fibonacciLog
 }

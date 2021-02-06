@@ -14,8 +14,11 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+
 	implementation 'org.mapstruct:mapstruct:1.3.1.Final'
 	compileOnly 'org.projectlombok:lombok:1.18.2'
 
