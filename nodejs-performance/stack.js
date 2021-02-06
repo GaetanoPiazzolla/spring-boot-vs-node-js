@@ -7,6 +7,14 @@ app.get('/fibonacci/:num', (req,res) => {
     })
 })
 
+app.get('/dostuff/:num', (req,res) => {
+        res.json({num: doStuff(req.params.num)})
+    })
+
+function doStuff(n){
+    for(let i=0; i<n*10000; i++) { i=i}
+}
+
 function fibo(n) {
     if (n < 2)
         return 1;
