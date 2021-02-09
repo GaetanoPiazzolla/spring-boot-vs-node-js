@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+  db-service:
+    container_name: db
+    build:
+      context: ../db
+    restart: always
+    env_file:
+      - ../db/.env
+    ports:
+      - "5000:5432"
