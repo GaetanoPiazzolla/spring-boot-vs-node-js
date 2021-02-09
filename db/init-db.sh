@@ -5,9 +5,8 @@ sleep 30
 
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
 
-DROP SCHEMA IF EXISTS library
-
-CREATE SCHEMA library AUTHORIZATION postgres;
+CREATE SCHEMA library 
+AUTHORIZATION postgres;
 
 CREATE SEQUENCE library.books_book_id_seq
     INCREMENT 1
