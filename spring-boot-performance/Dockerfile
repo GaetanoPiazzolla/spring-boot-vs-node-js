@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:x86_64-alpine-jdk-11.0.5_10-slim as builder
+FROM adoptopenjdk/openjdk11:centos as builder
 
 WORKDIR /src
 COPY src ./src/
@@ -13,7 +13,7 @@ RUN ./gradlew clean build --exclude-task testClasses
 ##
 #  Second Stage
 ##
-FROM adoptopenjdk/openjdk11:x86_64-alpine-jdk-11.0.5_10-slim
+FROM adoptopenjdk/openjdk11:centos
 EXPOSE 8080
 COPY --from=builder /src/build/libs/spring-boot-*  /app/spring-boot.jar
 ENTRYPOINT ["java","-Duser.timezone=GMT+1","-jar","/app/spring-boot.jar"]
