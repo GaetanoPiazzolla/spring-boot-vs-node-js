@@ -43,14 +43,8 @@ const configure = (app) => {
 
         }))
 
-    app.get('/cpu-intensive/fibonacci/:num', jwt.checkToken, (req,res) => {
-        cpuIntensive.fibonacci(req.params.num).then( (n) => {
-            res.json({num: n})
-        })
-    })
-
-    app.get('/cpu-intensive/fibonacci-log/:num', jwt.checkToken, (req,res) => {
-        cpuIntensive.fibonacciLog(req.params.num).then( (n) => {
+    app.get('/cpu-intensive/:num', jwt.checkToken, (req,res) => {
+        cpuIntensive.powTanAtan(req.params.num).then((n) => {
             res.json({num: n})
         })
     })

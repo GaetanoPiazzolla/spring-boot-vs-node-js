@@ -7,18 +7,21 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/cpu-intensive/")
-public class  FibonacciController {
+public class CpuIntensiveController {
 
-    private final Logger logger = LoggerFactory.getLogger(FibonacciController.class);
+    private final Logger logger = LoggerFactory.getLogger(CpuIntensiveController.class);
 
-    @GetMapping("fibonacci/{num}")
-    public Integer getFibonacci(@PathVariable("num") Integer num) {
-        return fibo(num);
+    @GetMapping("{num}")
+    public Integer cpuIntensive(@PathVariable("num") Integer num) {
+        return cpuIntensiveFunction(num);
     }
 
-    @GetMapping("fibonacci-log/{num}")
-    public Integer getFibonacciLog(@PathVariable("num") Integer num) {
-        return fiboLog(num);
+    private Integer cpuIntensiveFunction(Integer num) {
+        int result = 0;
+        for (double i = Math.pow(num, 7); i >= 0; i--) {
+            result += Math.atan(i) * Math.tan(i);
+        }
+        return result;
     }
 
     private Integer fibo(Integer num) {

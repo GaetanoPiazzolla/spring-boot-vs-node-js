@@ -26,6 +26,16 @@ const fibonacciLog = (num) => {
     })
 }
 
+const powTanAtan = (num) => {
+    return new Promise((resolve,reject) => {
+        let result = 0;
+        for (let i = Math.pow(num, 7); i >= 0; i--) {
+            result += Math.atan(i) * Math.tan(i);
+        }
+        resolve(result)
+    })
+}
+
 module.exports ={
-    fibonacci, fibonacciLog
+    fibonacci, fibonacciLog, powTanAtan
 }
