@@ -14,15 +14,30 @@ services:
     deploy:
       resources:
         limits:
-          memory: 100M
+          memory: 500M
         reservations:
-          memory: 100M
+          memory: 500M
     
-  microservice:
+  spring-boot:
     build: 
-        context: ../spring-boot-performance # ../nodejs-performance
+        context: ../spring-boot-performance
     depends_on: 
-      - "db-service"
+      - db-service
+    expose:
+      - "8080"
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          memory: 200M
+        reservations:
+          memory: 200M
+          
+  node-js:
+    build: 
+        context: ../nodejs-performance
+    depends_on: 
+      - db-service
     expose:
       - "8080"
     deploy:
@@ -38,6 +53,14 @@ services:
     volumes:
       - ../nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
-      - "microservice"
+      - spring-boot
+      - node-js
     ports:
       - "4000:4000"
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          memory: 500M
+        reservations:
+          memory: 500M
