@@ -25,6 +25,7 @@ services:
       - db-service
     expose:
       - "8080"
+    restart: always
     deploy:
       replicas: 2
       resources:
@@ -40,6 +41,7 @@ services:
       - db-service
     expose:
       - "8080"
+    restart: always
     deploy:
       replicas: 2
       resources:
@@ -57,6 +59,7 @@ services:
       - node-js
     ports:
       - "4000:4000"
+    restart: always
     deploy:
       replicas: 1
       resources:
