@@ -12,12 +12,12 @@ public class CpuIntensiveController {
     private final Logger logger = LoggerFactory.getLogger(CpuIntensiveController.class);
 
     @GetMapping("{num}")
-    public Integer cpuIntensive(@PathVariable("num") Integer num) {
+    public Double cpuIntensive(@PathVariable("num") Integer num) {
         return cpuIntensiveFunction(num);
     }
 
-    private Integer cpuIntensiveFunction(Integer num) {
-        int result = 0;
+    private double cpuIntensiveFunction(Integer num) {
+        double result = 0;
         for (double i = Math.pow(num, 7); i >= 0; i--) {
             result += Math.atan(i) * Math.tan(i);
         }
