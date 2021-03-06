@@ -48,14 +48,7 @@ services:
     expose:
       - "8080"
     restart: always
-    deploy:
-      replicas: 4
-      resources:
-        limits:
-          cpus: 0.5
-          memory: 200M
-        reservations:
-          memory: 200M
+    
           
   node-js:
     build: 
@@ -65,12 +58,4 @@ services:
     expose:
       - "8080"
     restart: always
-    deploy:
-      replicas: 4
-      resources:
-        limits:
-          cpus: 0.5
-          memory: 200M
-        reservations:
-          memory: 200M
-
+    
